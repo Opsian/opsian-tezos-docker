@@ -1,6 +1,10 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/London"
-RUN apt-get update && apt-get install -y opam curl wget cmake libunwind-dev libdw-dev
+RUN apt-get update && apt-get install -y opam curl wget cmake libunwind-dev libdw-dev ubuntu-dbgsym-keyring lsb-release
+RUN echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" >> /etc/apt/sources.list.d/ddebs.list
+RUN echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" >> /etc/apt/sources.list.d/ddebs.list
+RUN echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-proposed main restricted universe multiverse" >> /etc/apt/sources.list.d/ddebs.list
+RUN apt-get update && apt-get install -y libev4-dbgsym
 # Do westprof
 WORKDIR /
 COPY ./westprof ./westprof
