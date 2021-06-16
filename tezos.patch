@@ -1,0 +1,13 @@
+diff --git a/src/lib_base/dune b/src/lib_base/dune
+index b4e1ed692..bcbe6ff85 100644
+--- a/src/lib_base/dune
++++ b/src/lib_base/dune
+@@ -22,6 +22,7 @@
+             ptime
+             ezjsonm
+             lwt
+-            ipaddr))
++            ipaddr
++            lib-opsian))
+ 
+ (ocamllex point_parser)
