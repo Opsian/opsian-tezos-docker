@@ -8,6 +8,6 @@ index b4e1ed692..bcbe6ff85 100644
              lwt
 -            ipaddr))
 +            ipaddr
-+            lib-opsian))
++            opsian))
  
  (ocamllex point_parser)

@@ -29,7 +29,7 @@ WORKDIR /
 RUN mkdir ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 COPY ./opsian-ocaml/ ./opsian-ocaml
-RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool
+RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
 WORKDIR /opsian-ocaml
 RUN opam install -y .
 WORKDIR /tezos
