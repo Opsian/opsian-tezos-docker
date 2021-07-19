@@ -18,7 +18,6 @@ RUN chmod +x fetch-params.sh
 RUN ./fetch-params.sh
 RUN git clone https://gitlab.com/tezos/tezos
 WORKDIR tezos
-RUN git fetch origin merge-requests/2671/head:tezos-4.12 && git checkout tezos-4.12
 COPY ./tezos.patch .
 ENV PATH="/root/.cargo/bin:/westprof/third_party/protobuf/bin:${PATH}"
 RUN make build-deps
@@ -27,11 +26,11 @@ RUN git apply ./tezos.patch
 WORKDIR /
 # make git happy
 RUN mkdir ~/.ssh
+RUN touch ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-COPY ./opsian-ocaml/ ./opsian-ocaml
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
-WORKDIR /opsian-ocaml
-RUN opam install -y .
+COPY ./opsian-ocaml/ ./opsian-ocaml
 WORKDIR /tezos
-RUN opam exec -- make
+RUN opam pin -y add opsian git+file:///opsian-ocaml#main
+RUN eval $(opam env) && opam exec -- make
 CMD ./tezos-node run
