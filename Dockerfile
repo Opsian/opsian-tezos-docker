@@ -19,7 +19,7 @@ RUN ./fetch-params.sh
 RUN git clone https://gitlab.com/tezos/tezos
 WORKDIR tezos
 COPY ./tezos.patch .
-ENV PATH="/root/.cargo/bin:/westprof/third_party/protobuf/bin:${PATH}"
+ENV PATH="/root/.cargo/bin:${PATH}"
 RUN make build-deps
 RUN opam exec -- make
 RUN git apply ./tezos.patch
@@ -31,6 +31,7 @@ RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
 COPY ./opsian-ocaml/ ./opsian-ocaml
 WORKDIR /tezos
-RUN opam pin -y add opsian git+file:///opsian-ocaml#main
+RUN opam pin -y --debug -vv add opsian git+file:///opsian-ocaml#main
+RUN opam install -y --debug -vv opsian
 RUN eval $(opam env) && opam exec -- make
 CMD ./tezos-node run
