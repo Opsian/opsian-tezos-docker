@@ -29,7 +29,7 @@ RUN mkdir ~/.ssh
 RUN touch ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
-RUN git clone --recurse-submodules https://github.com/Opsian/opsian-ocaml
+RUN git clone --recurse-submodules https://github.com/Opsian/opsian-ocaml # force rebuild
 WORKDIR /tezos
 RUN opam pin -y --debug -vv add opsian git+file:///opsian-ocaml#main
 RUN opam install -y --debug -vv opsian
