@@ -16,7 +16,7 @@ do
   then
     SNAPSHOT_LINE=$(curl -s https://snapshots-tezos.giganode.io | grep 'href="https://snapshots-tezos.giganode.io/snapshots/mainnet' | head -n 1)
     SNAPSHOT_URL=$(echo "$SNAPSHOT_LINE" | sed 's/.*href="//;s/".*//')
-    SNAPSHOT_BLOCK=$(echo "$SNAPSHOT_LINE" | sed 's/.*_//;s/\.rolling.*//')
+    SNAPSHOT_BLOCK=$(echo "$SNAPSHOT_LINE" | sed 's/.*_//;s/\.full.*//')
 
     rm -f /data/snapshot
     wget "$SNAPSHOT_URL" -O /data/snapshot || true
