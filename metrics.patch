@@ -1,0 +1,13 @@
+diff --git a/scripts/install_build_deps.sh b/scripts/install_build_deps.sh
+index e378b4d9c..37cfe87e2 100755
+--- a/scripts/install_build_deps.sh
++++ b/scripts/install_build_deps.sh
+@@ -15,6 +15,7 @@ opam_repository=${opam_repository:?}
+ create_opam_switch() {
+     [ -n "$1" ] || { echo "create_opam_switch expects a non-empty argument"; return 1; }
+     opam switch create "$1" --repositories=tezos "ocaml-base-compiler.$ocaml_version"
++    opam pin add -y --unlock-base ocaml-variants.4.12.1+eventring git+https://www.github.com/sadiqj/ocaml#eventring
+ }
+ 
+ if [ "$1" = "--dev" ]; then
+
