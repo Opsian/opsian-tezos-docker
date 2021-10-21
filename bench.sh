@@ -6,6 +6,7 @@ export DATE=""
 DATE=$(date +'%d')
 export SNAPSHOT_BLOCK=""
 export OPSIAN_OPTS="apiKey=$OPS_KEY,applicationVersion=1,debugLogPath=/data/£{ARGV_0}-£{PID}-debug.log,agentId=£{ARGV_0}-snapshot"
+export OCAMLRUNPARAM='v=0x400'
 
 if [ -f /data/block ]
 then
@@ -35,4 +36,3 @@ do
   time ./tezos-node snapshot --data-dir /data/tezos-node-mainnet import --block "$SNAPSHOT_BLOCK" /data/snapshot
 
 done
-
