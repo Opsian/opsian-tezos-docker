@@ -21,7 +21,7 @@ do
   NEW_DATE=$(date +'%d')
   if [ "$DATE" -ne "$NEW_DATE" ] || [ ! -f /data/snapshot ]
   then
-    SNAPSHOT_LINE=$(curl -s https://snapshots-tezos.giganode.io | grep 'href="https://snapshots-tezos.giganode.io/snapshots/mainnet' | head -n 1)
+    SNAPSHOT_LINE=$(curl -s https://snapshots-tezos.giganode.io | grep 'href="https://snapshots-tezos.giganode.io/snapshots/mainnet' | grep rolling | head -n 1)
     SNAPSHOT_URL=$(echo "$SNAPSHOT_LINE" | sed 's/.*href="//;s/".*//')
     SNAPSHOT_BLOCK=$(echo "$SNAPSHOT_LINE" | sed 's/.*_//;s/\.rolling.*//')
 
