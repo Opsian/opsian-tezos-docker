@@ -2,6 +2,7 @@
 
 set -eux
 
+sysctl -w kernel.core_pattern="/data/cores/core.%e.%p"
 export DATE=""
 DATE=$(date +'%d')
 export SNAPSHOT_BLOCK=""

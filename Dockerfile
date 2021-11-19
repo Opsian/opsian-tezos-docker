@@ -24,7 +24,7 @@ COPY ./metrics.patch .
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN if [ "$METRICS" = "ON" ]; \
       then git apply ./metrics.patch; \
-    fi
+    fi #
 RUN make build-deps
 RUN git apply ./tezos.patch
 WORKDIR /
@@ -33,7 +33,7 @@ RUN mkdir ~/.ssh
 RUN touch ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
-RUN git clone --depth 1 --shallow-submodules --recurse-submodules https://github.com/Opsian/opsian-ocaml
+RUN git clone --depth 1 --shallow-submodules --recurse-submodules https://github.com/Opsian/opsian-ocaml #
 WORKDIR /tezos
 RUN opam pin -y --debug -vv add opsian git+file:///opsian-ocaml#main
 RUN opam install -y --debug -vv opsian
