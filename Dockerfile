@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 ARG METRICS
+ARG ASAN
 ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/London"
 RUN apt update && apt install -y opam curl ubuntu-dbgsym-keyring lsb-release
 RUN echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" >> /etc/apt/sources.list.d/ddebs.list
@@ -34,6 +35,10 @@ RUN touch ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
 RUN git clone --depth 1 --shallow-submodules --recurse-submodules https://github.com/Opsian/opsian-ocaml #
+RUN if [ "$ASAN" = "ON" ]; \
+      then git apply ./enable-asan.patch; \
+           export ASAN_OPTIONS='handle_segv=0,log_path=/data/asan.log,detect_stack_use_after_return=1,detect_invalid_pointer_pairs=1,strict_string_checks=1,check_initialization_order=1,strict_init_order=1'; \
+    fi
 WORKDIR /tezos
 RUN opam pin -y --debug -vv add opsian git+file:///opsian-ocaml#main
 RUN opam install -y --debug -vv opsian
