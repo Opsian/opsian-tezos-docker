@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eux
+set -x
 
 sysctl -w kernel.core_pattern="/data/cores/core.%e.%p"
 export DATE=""

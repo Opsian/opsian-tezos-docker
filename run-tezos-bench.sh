@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -eux
 
 export OPS_KEY=$1
 export DATA_DIR=$2
