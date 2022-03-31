@@ -1,14 +1,14 @@
 diff --git a/src/lib_base/dune b/src/lib_base/dune
-index 1d95f0f47..e7e4d118b 100644
+index d4369e277..966faca85 100644
 --- a/src/lib_base/dune
 +++ b/src/lib_base/dune
-@@ -14,7 +14,8 @@
-   ptime
+@@ -18,7 +18,8 @@
+   ptime.clock.os
    ezjsonm
    lwt
 -  ipaddr)
 +  ipaddr
 +  opsian)
+  (js_of_ocaml (javascript_files ptime.js))
   (flags
    (:standard
-    -open Tezos_stdlib

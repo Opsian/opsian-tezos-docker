@@ -36,7 +36,7 @@ RUN touch ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 RUN apt install -y autoconf libc6-dev libpthread-stubs0-dev libtool liblzma-dev
 # removed --depth 1 for lwt
-RUN git clone --shallow-submodules --recurse-submodules https://github.com/Opsian/opsian-ocaml # Nope 7
+RUN git clone --shallow-submodules --recurse-submodules https://github.com/Opsian/opsian-ocaml # Nope 8
 RUN if [ "$ASAN" = "ON" ]; \
       then git apply ./enable-asan.patch; \
            export ASAN_OPTIONS='handle_segv=0,log_path=/data/asan.log,detect_stack_use_after_return=1,detect_invalid_pointer_pairs=1,strict_string_checks=1,check_initialization_order=1,strict_init_order=1'; \
