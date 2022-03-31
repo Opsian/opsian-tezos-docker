@@ -6,7 +6,10 @@ sysctl -w kernel.core_pattern="/data/cores/core.%e.%p"
 export DATE=""
 DATE=$(date +'%d')
 export SNAPSHOT_BLOCK=""
-export OPSIAN_OPTS="apiKey=$OPS_KEY,applicationVersion=1,debugLogPath=/data/£{ARGV_0}-£{PID}-debug.log,agentId=£{ARGV_0}-snapshot"
+if [ -z "$OPSIAN_OPTS" ]
+then
+  export OPSIAN_OPTS="apiKey=$OPS_KEY,applicationVersion=1,debugLogPath=/data/£{ARGV_0}-£{PID}-debug.log,agentId=£{ARGV_0}-snapshot"
+fi
 export OCAMLRUNPARAM='v=0x400'
 
 if [ -f /data/block ]
